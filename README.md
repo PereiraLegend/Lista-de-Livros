@@ -1,4 +1,11 @@
 # Lista de Livros - Aplicação Fullstack
+
+Projeto criado com:
+* Linguagem: TypeScript
+* Backend: Fastify
+* Frontend: Next.js + Shadcn UI + TailwindCss
+* Database: SqlLite3
+
 Para iniciar a API automáticamente você pode usar:
 
 ```bash
@@ -62,5 +69,3 @@ curl --location --request DELETE 'localhost:3001/books/1945d582-07d8-471c-b5c3-e
 cd frontend
 npm run dev
 ```
-
-Acesse: http://localhost:3000
