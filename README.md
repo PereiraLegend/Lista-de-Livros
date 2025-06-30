@@ -69,3 +69,5 @@ curl --location --request DELETE 'localhost:3001/books/1945d582-07d8-471c-b5c3-e
 cd frontend
 npm run dev
 ```
+
+Acesse: https://lista-de-livros-y16k.vercel.app/
