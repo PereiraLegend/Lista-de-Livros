@@ -1,2 +1,3 @@
-# Lista-de-Livros
-É uma aplicação fullstack para gerenciar uma lista de livros
+# Lista de Livros - Aplicação Fullstack
+
+Uma aplicação completa para gerenciar sua coleção pessoal de livros, construída com tecnologias modernas.
