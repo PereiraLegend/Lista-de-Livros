@@ -81,7 +81,36 @@ export class BookService {
         }
     }
 
-    static async updateBook(id: string, book: UpdateBookRequest): Promise<Book> {
+    static async updateBook(id: string, book: CreateBookRequest): Promise<Book> {
+        try {
+            const response = await fetch(`${API_BASE_URL}/books/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(book),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Erro na resposta:', errorText);
+                throw new Error(`Erro HTTP: ${response.status} - ${errorText}`);
+            }
+
+            const result: ApiResponse<Book> = await response.json();
+
+            if (!result.success || !result.data) {
+                throw new Error(result.message || 'Erro ao atualizar livro');
+            }
+
+            return result.data;
+        } catch (error) {
+            console.error('Erro ao atualizar livro:', error);
+            throw error;
+        }
+    }
+
+    static async updateBookPartial(id: string, book: UpdateBookRequest): Promise<Book> {
         try {
             const response = await fetch(`${API_BASE_URL}/books/${id}`, {
                 method: 'PATCH',
@@ -92,7 +121,9 @@ export class BookService {
             });
 
             if (!response.ok) {
-                throw new Error(`Erro HTTP: ${response.status}`);
+                const errorText = await response.text();
+                console.error('Erro na resposta:', errorText);
+                throw new Error(`Erro HTTP: ${response.status} - ${errorText}`);
             }
 
             const result: ApiResponse<Book> = await response.json();

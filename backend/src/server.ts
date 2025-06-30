@@ -8,13 +8,12 @@ const fastify = Fastify({
 
 const start = async () => {
     try {
-        // Registrar CORS
         await fastify.register(cors, {
-            origin: ['http://localhost:3000'], // Frontend Next.js
-            credentials: true
+            origin: true,
+            credentials: true,
+            methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
         });
 
-        // Registrar rotas
         await fastify.register(booksRoutes);
 
         // Health check endpoint
@@ -22,7 +21,6 @@ const start = async () => {
             return { status: 'OK', message: 'API de Lista de Livros funcionando!' };
         });
 
-        // Iniciar servidor
         const port = process.env.PORT ? parseInt(process.env.PORT) : 3001;
         await fastify.listen({ port, host: '0.0.0.0' });
 

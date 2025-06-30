@@ -4,6 +4,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+frontend/yarn.lock
+backend/yarn.lock
+
 # Builds
 dist/
 build/

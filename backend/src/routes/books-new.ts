@@ -2,7 +2,6 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import { Book, CreateBookRequest, UpdateBookRequest } from '../types/book';
 import { DatabaseService } from '../database/database';
 
-// Instância do serviço de banco de dados
 const dbService = new DatabaseService();
 
 export default async function booksRoutes(fastify: FastifyInstance) {
@@ -59,7 +58,6 @@ export default async function booksRoutes(fastify: FastifyInstance) {
         try {
             const { title, author, publishedYear } = request.body as CreateBookRequest;
 
-            // Validação básica
             if (!title || !author || !publishedYear) {
                 return reply.code(400).send({
                     success: false,
@@ -100,7 +98,6 @@ export default async function booksRoutes(fastify: FastifyInstance) {
             const { id } = request.params as { id: string };
             const { title, author, publishedYear } = request.body as CreateBookRequest;
 
-            // Validação básica
             if (!title || !author || !publishedYear) {
                 return reply.code(400).send({
                     success: false,
@@ -148,7 +145,6 @@ export default async function booksRoutes(fastify: FastifyInstance) {
             const { id } = request.params as { id: string };
             const updateData = request.body as UpdateBookRequest;
 
-            // Validar se pelo menos um campo foi fornecido
             if (!updateData.title && !updateData.author && !updateData.publishedYear) {
                 return reply.code(400).send({
                     success: false,
@@ -156,7 +152,6 @@ export default async function booksRoutes(fastify: FastifyInstance) {
                 });
             }
 
-            // Validar publishedYear se fornecido
             if (updateData.publishedYear !== undefined &&
                 (typeof updateData.publishedYear !== 'number' || updateData.publishedYear < 0)) {
                 return reply.code(400).send({
@@ -165,7 +160,6 @@ export default async function booksRoutes(fastify: FastifyInstance) {
                 });
             }
 
-            // Limpar strings se fornecidas
             const cleanedData: UpdateBookRequest = {};
             if (updateData.title) cleanedData.title = updateData.title.trim();
             if (updateData.author) cleanedData.author = updateData.author.trim();
